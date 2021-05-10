@@ -1,6 +1,5 @@
 '''
 @author Cristian Mino <cristian.mino@icloud.com>
-@fileCreated 9th May 2021
 '''
 import os
 import mysql.connector
