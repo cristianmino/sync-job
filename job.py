@@ -2,6 +2,7 @@
 @author Cristian Mino <cristian.mino@icloud.com>
 '''
 import os
+import requests
 import mysql.connector
 from mysql.connector import errorcode
 from dotenv import load_dotenv
@@ -56,6 +57,10 @@ def sincronizar(tipo_doc):
     for (empr, tcbt, nloc, ncbt, tdoc, pfsri, ndoc, autr, faut, femi, clac, toff, stus, stusw, vtot, xml, clie, email, obse, piva, ulactd) in cursorOrigen:
       cursorDestino.execute(insertDestino,(empr, tcbt, nloc, ncbt, tdoc, pfsri, ndoc, autr, faut, femi, clac, toff, stus, stusw, vtot, xml, clie, email, obse, piva, ulactd))
       cnxDestino.commit()
+      urlMail = "http://192.130.1.51:8765/facturas/mail?documento="+tdoc+"-"+pfsri+"-"+str(ndoc)+"&ciruc="+clie
+      print(urlMail)
+      response = requests.get(urlMail)
+      print(response)
     cursorCountOrigen.close()
     cursorCountDestino.close()
     cursorOrigen.close()
