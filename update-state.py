@@ -55,7 +55,7 @@ def actualizar():
       cursorOrigenData.execute(queryOrigenData, (empr, tcbt, nloc, ncbt))
       records = cursorOrigenData.fetchall()
       for(empr, tcbt, nloc, ncbt, tdoc, pfsri, ndoc, autr, faut, femi, clac, toff, stus, stusw, vtot, xml, clie, email, obse, piva, ulactd) in records:
-        if(stus == 'A'):
+        if(stus == 'A' and empr == 'DJV'):
           contador += 1
           cursorDestino = cnxDestino.cursor()
           updateDestino = ("UPDATE docout SET  autr=%s, faut=%s, femi=%s, clac=%s, toff=%s, stus=%s, stusw=%s, vtot=%s, xml=%s, clie=%s, email=%s, obse=%s, piva=%s, ulactd=%s) "
@@ -69,7 +69,7 @@ def actualizar():
     cursorDestinoNoAutorizados.close()
     cursorOrigenData.close()
     print(f"{datetime.now()} - Cantidad de registros actualizados {contador}")
-  except mysql.connector.Error as err:
+  except Exception as err:
     print(err)
     # exit(1)
 

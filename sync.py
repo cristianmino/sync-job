@@ -61,17 +61,18 @@ def sincronizar(empr, tcbt):
     for (empr, tcbt, nloc, ncbt, tdoc, pfsri, ndoc, autr, faut, femi, clac, toff, stus, stusw, vtot, xml, clie, email, obse, piva, ulactd) in cursorOrigen:
       cursorDestino.execute(insertDestino,(empr, tcbt, nloc, ncbt, tdoc, pfsri, ndoc, autr, faut, femi, clac, toff, stus, stusw, vtot, xml, clie, email, obse, piva, ulactd))
       cnxDestino.commit()
-      if(stus == 'A' and (tcbt == 'EB' or tcbt == 'IB')):
+      if(stus == 'A' and (tcbt == 'EB' or tcbt == 'IB') and empr == 'DJV'):
         urlMail = "http://192.130.1.51:8765/facturas/mail?documento="+tdoc+"-"+pfsri+"-"+str(ndoc)+"&ciruc="+clie
         response = requests.get(urlMail)
         print(urlMail, response.status_code)
+        time.sleep(5)
     cursorCountOrigen.close()
     cursorCountDestino.close()
     cursorOrigen.close()
     cursorDestino.close()
     cantidad = cantidadOrigen[0] - cantidadDestino[0]
     print(f"{datetime.now()} - Empresa {empr} - Tipo Comprobante {tcbt} - Cantidad {cantidad}")
-  except mysql.connector.Error as err:
+  except Exception as err:
     print(err)
     # exit(1)
 
@@ -82,17 +83,17 @@ sincronizar('DJV', 'CS')
 sincronizar('DJV', 'GR')
 sincronizar('DJV', 'RT')
 time.sleep(5)
-sincronizar('PML', 'EB')
-sincronizar('PML', 'IB')
-sincronizar('PML', 'CS')
-sincronizar('PML', 'GR')
-sincronizar('PML', 'RT')
+#sincronizar('PML', 'EB')
+#sincronizar('PML', 'IB')
+#sincronizar('PML', 'CS')
+#sincronizar('PML', 'GR')
+#sincronizar('PML', 'RT')
 time.sleep(5)
-sincronizar('PRD', 'EB')
-sincronizar('PRD', 'IB')
-sincronizar('PRD', 'CS')
-sincronizar('PRD', 'GR')
-sincronizar('PRD', 'RT')
+#sincronizar('PRD', 'EB')
+#sincronizar('PRD', 'IB')
+#sincronizar('PRD', 'CS')
+#sincronizar('PRD', 'GR')
+#sincronizar('PRD', 'RT')
 
 
 
