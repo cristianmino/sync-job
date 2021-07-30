@@ -64,11 +64,10 @@ def actualizar():
           cnxDestino.commit()
           urlMail = "http://192.130.1.51:8765/facturas/mail?documento="+tdoc+"-"+pfsri+"-"+str(ndoc)+"&ciruc="+clie
           response = requests.get(urlMail)
-          print(urlMail, response)
+          print(urlMail, response.status_code)
     # cursorOrigen.close()
     cursorDestinoNoAutorizados.close()
     cursorOrigenData.close()
-    
     print(f"{datetime.now()} - Cantidad de registros actualizados {contador}")
   except mysql.connector.Error as err:
     print(err)

@@ -70,7 +70,7 @@ def sincronizar(empr, tcbt):
     cursorOrigen.close()
     cursorDestino.close()
     cantidad = cantidadOrigen[0] - cantidadDestino[0]
-    print(f"{datetime.now()} - Empresa {empr} - Tipo Comprobante {tcbt} - Cantidad: {cantidad}")
+    print(f"{datetime.now()} - Empresa {empr} - Tipo Comprobante {tcbt} - Cantidad {cantidad}")
   except mysql.connector.Error as err:
     print(err)
     # exit(1)
