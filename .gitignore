@@ -1,4 +1,5 @@
 .env
 venv
 venv/**
-logcron.log
+*.log
+*-*.log
