@@ -61,7 +61,7 @@ def sincronizar(empr, tcbt):
     for (empr, tcbt, nloc, ncbt, tdoc, pfsri, ndoc, autr, faut, femi, clac, toff, stus, stusw, vtot, xml, clie, email, obse, piva, ulactd) in cursorOrigen:
       cursorDestino.execute(insertDestino,(empr, tcbt, nloc, ncbt, tdoc, pfsri, ndoc, autr, faut, femi, clac, toff, stus, stusw, vtot, xml, clie, email, obse, piva, ulactd))
       cnxDestino.commit()
-      if(stus == 'A' and (tcbt == 'EB' or tcbt == 'IB') and empr == 'DJV'):
+      if(stus == 'A' and (tcbt == 'EB' or tcbt == 'IB')):
         urlMail = "http://192.130.1.51:8765/facturas/mail?documento="+tdoc+"-"+pfsri+"-"+str(ndoc)+"&ciruc="+clie
         response = requests.get(urlMail)
         print(urlMail, response.status_code)
